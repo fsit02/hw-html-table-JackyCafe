@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Exercises</title>
+	
+
+
+</head>
+<body>
+ 	txt1:
+	<input type="text" id="txt1" name="txt1" value="" PlaceHolder="Keyin something" size="40">
+	<br><br>
+	<input type="button" id="Button1" name="Button1"   
+		value="2. 點我一下，執行 JavaScript" onclick="Button1_onclick()">
+	<br><br>
+	txt2:
+    <INPUT type="text" id="txt2"  name="txt2" value=" " size="40">
+    <br>
+    <div id="debug">...</div>
+    <div id="debug1">...</div>
+
+    
+ <script>
+    var ans = new String (createAns(4));
+//    debug.innerText = ans;
+    var time =0 ;
+    var show =" ";
+function Button1_onclick() {
+   txt2.value = guess();
+   if (txt2.value=="4A0B") {alert("you Win") ;}
+   else
+   {
+       time++;
+       show += txt1.value + " >> " + guess()+"\n";
+       txt1.value = "" ;
+       debug1.innerText = show;
+   }
+   if(time == 10 ) {
+       alert("你是魯蛇： 謎底:"+ans.toString()); }
+ 
+}
+
+function guess()
+{
+    var input = new String (txt1.value) ;
+    var A = 0;
+    var B = 0;
+    debug1.value = input
+    for( var i = 0;i < 4; i++)
+    {
+        if (input.toString().charAt(i)==ans.charAt(i))
+        { A++; } 
+        else if(input.indexOf(ans.charAt(i))> -1)
+        { B++; }
+        
+        
+    }
+    
+    return A+"A"+B+"B";
+}
+
+
+
+
+function  createAns( x)
+{
+   var g = new Array();
+   var rand;
+   var result="";
+
+    for(var i = 0; i<=9 ; i++)
+    {
+         g[i] = i ;
+        
+    }
+     for (var i=g.length-1 ; i >=0; i--)
+    {
+        rand = Math.floor((Math.random()*i))  ;
+        temp = g[rand];
+        g[rand] = g[i] ;
+        g[i] = temp ;
+       }
+
+    for (var i=0 ; i < g.length ; i++){
+    result += g[i];
+ }
+    return result.substr(1,x);
+}
+
+</script>
+
+</body>
+</html>
